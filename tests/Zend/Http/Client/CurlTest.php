@@ -141,9 +141,9 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
      */
     public function testSettingInvalidCurlOption()
     {
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"CURLOPT_CLOSEPOLICY\" is removed since PHP 5.6", E_USER_WARNING);
         $config = array(
             'adapter'     => 'Zend_Http_Client_Adapter_Curl',
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"CURLOPT_CLOSEPOLICY\" is removed since PHP 5.6", E_USER_WARNING);
             'curloptions' => array(CURLOPT_CLOSEPOLICY => true),
         );
         $this->client = new Zend_Http_Client($this->client->getUri(true), $config);

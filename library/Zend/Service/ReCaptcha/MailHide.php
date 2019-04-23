@@ -37,9 +37,7 @@ class Zend_Service_ReCaptcha_MailHide extends Zend_Service_ReCaptcha
     /**#@+
      * Encryption constants
      */
-    trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_MODE_CBC\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
     const ENCRYPTION_MODE = MCRYPT_MODE_CBC;
-    trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_RIJNDAEL_128\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
     const ENCRYPTION_CIPHER = MCRYPT_RIJNDAEL_128;
     const ENCRYPTION_BLOCK_SIZE = 16;
     const ENCRYPTION_IV = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
@@ -95,6 +93,9 @@ class Zend_Service_ReCaptcha_MailHide extends Zend_Service_ReCaptcha
      */
     public function __construct($publicKey = null, $privateKey = null, $email = null, $options = null)
     {
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_MODE_CBC\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_RIJNDAEL_128\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
+
         /* Require the mcrypt extension to be loaded */
         $this->_requireMcrypt();
 

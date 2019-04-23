@@ -60,13 +60,13 @@ class Zend_Validate_DigitsTest extends PHPUnit_Framework_TestCase
      */
     public function testExpectedResultsWithBasicInputValues()
     {
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The behaviour of hexadecimal numeric strings was inconsistent prior to PHP 7 and support has been removed in PHP 7.", E_USER_WARNING);
         $valuesExpected = array(
             'abc123'  => false,
             'abc 123' => false,
             'abcxyz'  => false,
             'AZ@#4.3' => false,
             '1.23'    => false,
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The behaviour of hexadecimal numeric strings was inconsistent prior to PHP 7 and support has been removed in PHP 7.", E_USER_WARNING);
             '0x9f'    => false,
             '123'     => true,
             '09'      => true,

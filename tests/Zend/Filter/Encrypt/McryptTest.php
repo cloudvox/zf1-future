@@ -92,12 +92,11 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
     {
         $filter = new Zend_Filter_Encrypt_Mcrypt(array('key' => 'testkey'));
         $filter->setVector('testvect');
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_BLOWFISH\" is deprecated since PHP 7.1 and removed since PHP 7.2\n\tERROR: The constant \"MCRYPT_MODE_CBC\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
         $this->assertEquals(
             array('key' => 'testkey',
-                  trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_BLOWFISH\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
                   'algorithm' => MCRYPT_BLOWFISH,
                   'algorithm_directory' => '',
-                  trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_MODE_CBC\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
                   'mode' => MCRYPT_MODE_CBC,
                   'mode_directory' => '',
                   'vector' => 'testvect',
@@ -115,17 +114,15 @@ class Zend_Filter_Encrypt_McryptTest extends PHPUnit_Framework_TestCase
     {
         $filter = new Zend_Filter_Encrypt_Mcrypt(array('key' => 'testkey'));
         $filter->setVector('testvect');
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_MODE_ECB\" is deprecated since PHP 7.1 and removed since PHP 7.2\n\tERROR: The constant \"MCRYPT_3DES\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
         $filter->setEncryption(
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_MODE_ECB\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
             array('mode' => MCRYPT_MODE_ECB,
-                  trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_3DES\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
                   'algorithm' => MCRYPT_3DES));
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_3DES\" is deprecated since PHP 7.1 and removed since PHP 7.2\n\tERROR: The constant \"MCRYPT_MODE_ECB\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
         $this->assertEquals(
             array('key' => 'testkey',
-                  trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_3DES\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
                   'algorithm' => MCRYPT_3DES,
                   'algorithm_directory' => '',
-                  trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_MODE_ECB\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
                   'mode' => MCRYPT_MODE_ECB,
                   'mode_directory' => '',
                   'vector' => 'testvect',

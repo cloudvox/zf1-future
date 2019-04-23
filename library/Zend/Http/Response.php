@@ -602,8 +602,8 @@ class Zend_Http_Response
 
         // If mbstring overloads substr and strlen functions, we have to
         // override it's internal encoding
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'mbstring.func_overload' is deprecated since PHP 7.2", E_USER_WARNING);
         if (function_exists('mb_internal_encoding') &&
-           trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'mbstring.func_overload' is deprecated since PHP 7.2", E_USER_WARNING);
            ((int) ini_get('mbstring.func_overload')) & 2) {
 
             $mbIntEnc = mb_internal_encoding();
