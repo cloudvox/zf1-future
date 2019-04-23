@@ -823,6 +823,7 @@ class Zend_Gdata_App
         }
 
         // Load the feed as an XML DOMDocument object
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2", E_USER_WARNING);
         @ini_set('track_errors', 1);
         $doc = new DOMDocument();
         $doc = @Zend_Xml_Security::scan($string, $doc);
@@ -855,6 +856,7 @@ class Zend_Gdata_App
     public static function importFile($filename,
             $className='Zend_Gdata_App_Feed', $useIncludePath = false)
     {
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2", E_USER_WARNING);
         @ini_set('track_errors', 1);
         $feed = @file_get_contents($filename, $useIncludePath);
         @ini_restore('track_errors');

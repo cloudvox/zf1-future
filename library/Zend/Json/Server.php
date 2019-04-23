@@ -100,6 +100,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
 
         $argv = null;
         if (2 < func_num_args()) {
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.", E_USER_WARNING);
             $argv = func_get_args();
             $argv = array_slice($argv, 2);
         }
@@ -143,6 +144,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
     {
         $argv = null;
         if (3 < func_num_args()) {
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.", E_USER_WARNING);
             $argv = func_get_args();
             $argv = array_slice($argv, 3);
         }

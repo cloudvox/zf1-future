@@ -80,6 +80,7 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
         if (!($element instanceof DOMElement)) {
             if ($element) {
                 // Load the feed as an XML DOMDocument object
+                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2", E_USER_WARNING);
                 @ini_set('track_errors', 1);
                 $doc = new DOMDocument();
                 $doc = @Zend_Xml_Security::scan($element, $doc);
@@ -87,6 +88,7 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
 
                 if (!$doc) {
                     // prevent the class to generate an undefined variable notice (ZF-2590)
+                    trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: The variable '\$php_errormsg' is deprecated since PHP 7.2; Use error_get_last() instead", E_USER_WARNING);
                     if (!isset($php_errormsg)) {
                         if (function_exists('xdebug_is_enabled')) {
                             $php_errormsg = '(error message not available, when XDebug is running)';

@@ -95,6 +95,7 @@ class Zend_Filter_DigitsTest extends PHPUnit_Framework_TestCase
                 'abcxyz'  => '',
                 'AZ@#4.3' => '43',
                 '1.23'    => '123',
+                trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The behaviour of hexadecimal numeric strings was inconsistent prior to PHP 7 and support has been removed in PHP 7.", E_USER_WARNING);
                 '0x9f'    => '09'
                 );
         }

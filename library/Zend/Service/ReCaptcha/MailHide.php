@@ -37,7 +37,9 @@ class Zend_Service_ReCaptcha_MailHide extends Zend_Service_ReCaptcha
     /**#@+
      * Encryption constants
      */
+    trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_MODE_CBC\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
     const ENCRYPTION_MODE = MCRYPT_MODE_CBC;
+    trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_RIJNDAEL_128\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
     const ENCRYPTION_CIPHER = MCRYPT_RIJNDAEL_128;
     const ENCRYPTION_BLOCK_SIZE = 16;
     const ENCRYPTION_IV = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
@@ -343,6 +345,7 @@ class Zend_Service_ReCaptcha_MailHide extends Zend_Service_ReCaptcha
         $emailPadded = str_pad($this->_email, strlen($this->_email) + $numPad, chr($numPad));
 
         /* Encrypt the email */
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_encrypt() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead", E_USER_WARNING);
         $emailEncrypted = mcrypt_encrypt(self::ENCRYPTION_CIPHER, $this->_privateKeyPacked, $emailPadded, self::ENCRYPTION_MODE, self::ENCRYPTION_IV);
 
         /* Return the url */

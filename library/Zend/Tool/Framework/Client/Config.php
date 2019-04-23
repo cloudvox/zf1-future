@@ -39,6 +39,7 @@ class Zend_Tool_Framework_Client_Config
     /**
      * @param array $options
      */
+    trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: Method name \"Zend_Tool_Framework_Client_Config::__config\" is discouraged; PHP has reserved all method names with a double underscore prefix for future use.", E_USER_WARNING);
     public function __config($options = array())
     {
         if ($options) {

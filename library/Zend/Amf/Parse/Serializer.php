@@ -53,6 +53,7 @@ abstract class Zend_Amf_Parse_Serializer
     public function __construct(Zend_Amf_Parse_OutputStream $stream)
     {
         $this->_stream = $stream;
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'mbstring.func_overload' is deprecated since PHP 7.2\n\tWARNING: INI directive 'mbstring.func_overload' is deprecated since PHP 7.2", E_USER_WARNING);
         $this->_mbStringFunctionsOverloaded = function_exists('mb_strlen') && (ini_get('mbstring.func_overload') !== '') && ((int)ini_get('mbstring.func_overload') & 2);
     }
 

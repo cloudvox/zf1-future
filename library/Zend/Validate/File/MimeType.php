@@ -169,6 +169,7 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
             if (!empty($_ENV['MAGIC'])) {
                 $this->setMagicFile($_ENV['MAGIC']);
             } elseif (
+                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'safe_mode' is deprecated since PHP 5.3 and removed since PHP 5.4\n\tWARNING: INI directive 'safe_mode' is deprecated since PHP 5.3 and removed since PHP 5.4", E_USER_WARNING);
                 !(@ini_get("safe_mode") == 'On' || @ini_get("safe_mode") === 1)
                 && $this->shouldTryCommonMagicFiles() // @see ZF-11784
             ) {

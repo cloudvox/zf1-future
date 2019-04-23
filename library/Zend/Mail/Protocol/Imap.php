@@ -407,6 +407,7 @@ class Zend_Mail_Protocol_Imap
             }
         }
         $result = array();
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.", E_USER_WARNING);
         foreach (func_get_args() as $string) {
             $result[] = $this->escapeString($string);
         }

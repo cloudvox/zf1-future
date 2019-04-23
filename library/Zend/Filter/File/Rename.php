@@ -63,6 +63,7 @@ class Zend_Filter_File_Rename implements Zend_Filter_Interface
         }
 
         if (1 < func_num_args()) {
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.", E_USER_WARNING);
             $argv = func_get_args();
             array_shift($argv);
             $source    = array_shift($argv);

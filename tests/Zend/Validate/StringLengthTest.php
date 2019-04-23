@@ -60,6 +60,7 @@ class Zend_Validate_StringLengthTest extends PHPUnit_Framework_TestCase
     public function testBasic()
     {
         if (PHP_VERSION_ID < 50600) {
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.", E_USER_WARNING);
             iconv_set_encoding('internal_encoding', 'UTF-8');
         } else {
             ini_set('default_charset', 'UTF-8');
@@ -166,6 +167,7 @@ class Zend_Validate_StringLengthTest extends PHPUnit_Framework_TestCase
     public function testDifferentEncodingWithValidator()
     {
         if (PHP_VERSION_ID < 50600) {
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.", E_USER_WARNING);
             iconv_set_encoding('internal_encoding', 'UTF-8');
         } else {
             ini_set('default_charset', 'UTF-8');

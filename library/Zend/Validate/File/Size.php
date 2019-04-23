@@ -113,6 +113,7 @@ class Zend_Validate_File_Size extends Zend_Validate_Abstract
         }
 
         if (1 < func_num_args()) {
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.", E_USER_WARNING);
             $argv = func_get_args();
             array_shift($argv);
             $options['max'] = array_shift($argv);

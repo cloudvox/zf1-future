@@ -155,6 +155,7 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
 
         $options  = $this->getOptions();
         $callback = $this->getCallback();
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.", E_USER_WARNING);
         $args     = func_get_args();
         $options  = array_merge($args, $options);
 

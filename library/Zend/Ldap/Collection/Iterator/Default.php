@@ -200,6 +200,7 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
 
         $entry = array('dn' => $this->key());
         $ber_identifier = null;
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The \"ber_identifier\" parameter for function ldap_first_attribute() is removed since PHP 5.2.4", E_USER_WARNING);
         $name = @ldap_first_attribute($this->_ldap->getResource(), $this->_current,
             $ber_identifier);
         while ($name) {
@@ -221,6 +222,7 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
                     break;
             }
             $entry[$attrName] = $data;
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The \"ber_identifier\" parameter for function ldap_next_attribute() is removed since PHP 5.2.4", E_USER_WARNING);
             $name = @ldap_next_attribute($this->_ldap->getResource(), $this->_current,
                 $ber_identifier);
         }

@@ -218,6 +218,7 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      */
     public static function setDefaultSearchField($fieldName)
     {
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: \"\$this\" can no longer be used in a plain function or method since PHP 7.1.", E_USER_WARNING);
         foreach ($this->_indices as $index) {
             $index->setDefaultSearchField($fieldName);
         }
@@ -234,13 +235,16 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      */
     public static function getDefaultSearchField()
     {
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: \"\$this\" can no longer be used in a plain function or method since PHP 7.1.", E_USER_WARNING);
         if (count($this->_indices) == 0) {
             require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Indices list is empty');
         }
 
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: \"\$this\" can no longer be used in a plain function or method since PHP 7.1.", E_USER_WARNING);
         $defaultSearchField = reset($this->_indices)->getDefaultSearchField();
 
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: \"\$this\" can no longer be used in a plain function or method since PHP 7.1.", E_USER_WARNING);
         foreach ($this->_indices as $index) {
             if ($index->getDefaultSearchField() !== $defaultSearchField) {
                 require_once 'Zend/Search/Lucene/Exception.php';
@@ -260,6 +264,7 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      */
     public static function setResultSetLimit($limit)
     {
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: \"\$this\" can no longer be used in a plain function or method since PHP 7.1.", E_USER_WARNING);
         foreach ($this->_indices as $index) {
             $index->setResultSetLimit($limit);
         }
@@ -275,13 +280,16 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      */
     public static function getResultSetLimit()
     {
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: \"\$this\" can no longer be used in a plain function or method since PHP 7.1.", E_USER_WARNING);
         if (count($this->_indices) == 0) {
             require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Indices list is empty');
         }
 
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: \"\$this\" can no longer be used in a plain function or method since PHP 7.1.", E_USER_WARNING);
         $defaultResultSetLimit = reset($this->_indices)->getResultSetLimit();
 
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: \"\$this\" can no longer be used in a plain function or method since PHP 7.1.", E_USER_WARNING);
         foreach ($this->_indices as $index) {
             if ($index->getResultSetLimit() !== $defaultResultSetLimit) {
                 require_once 'Zend/Search/Lucene/Exception.php';

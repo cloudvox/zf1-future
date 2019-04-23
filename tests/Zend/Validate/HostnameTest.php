@@ -62,6 +62,7 @@ class Zend_Validate_HostnameTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         if (PHP_VERSION_ID < 50600) {
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.", E_USER_WARNING);
             iconv_set_encoding('internal_encoding', $this->_origEncoding);
         } else {
             ini_set('default_charset', $this->_origEncoding);
@@ -368,6 +369,7 @@ class Zend_Validate_HostnameTest extends PHPUnit_Framework_TestCase
     public function testDifferentIconvEncoding()
     {
         if (PHP_VERSION_ID < 50600) {
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.", E_USER_WARNING);
             iconv_set_encoding('internal_encoding', 'ISO8859-1');
         } else {
             ini_set('default_charset', 'ISO8859-1');
