@@ -1522,7 +1522,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.", E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $options = func_get_args();
             $temp['allow'] = array_shift($options);
             if (!empty($options)) {
@@ -1740,7 +1740,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
                         ? iconv_get_encoding('internal_encoding')
                         : ini_get('default_charset');
             if (PHP_VERSION_ID < 50600) {
-                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.", E_USER_WARNING);
+                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                 iconv_set_encoding('internal_encoding', 'UTF-8');
             } else {
                 ini_set('default_charset', 'UTF-8');
@@ -1849,7 +1849,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
             } while (false);
 
             if (PHP_VERSION_ID < 50600) {
-                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.", E_USER_WARNING);
+                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                 iconv_set_encoding('internal_encoding', $origenc);
             } else {
                 ini_set('default_charset', $origenc);

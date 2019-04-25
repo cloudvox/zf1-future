@@ -746,7 +746,7 @@ class Zend_OpenId
      */
     static public function strlen($str)
     {
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'mbstring.func_overload' is deprecated since PHP 7.2", E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'mbstring.func_overload' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         if (extension_loaded('mbstring') &&
             (((int)ini_get('mbstring.func_overload')) & 2)) {
             return mb_strlen($str, 'latin1');

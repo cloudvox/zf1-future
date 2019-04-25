@@ -111,7 +111,7 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
      */
     public function __wakeup()
     {
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2", E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         @ini_set('track_errors', 1);
         $doc = new DOMDocument;
         $doc = @Zend_Xml_Security::scan($this->_element, $doc);
@@ -119,7 +119,7 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
 
         if (!$doc) {
             // prevent the class to generate an undefined variable notice (ZF-2590)
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: The variable '\$php_errormsg' is deprecated since PHP 7.2; Use error_get_last() instead", E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: The variable '\$php_errormsg' is deprecated since PHP 7.2; Use error_get_last() instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             if (!isset($php_errormsg)) {
                 if (function_exists('xdebug_is_enabled')) {
                     $php_errormsg = '(error message not available, when XDebug is running)';

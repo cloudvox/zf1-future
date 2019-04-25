@@ -105,7 +105,7 @@ class Zend_Service_WindowsAzure_Storage_Batch
         unset($this->_operations);
         $this->_storageClient->setCurrentBatch(null);
         $this->_storageClient = null;
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: \"\$this\" can no longer be unset since PHP 7.1.", E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: \"\$this\" can no longer be unset since PHP 7.1.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         unset($this);
     }
 

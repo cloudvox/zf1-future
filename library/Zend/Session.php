@@ -531,7 +531,7 @@ class Zend_Session extends Zend_Session_Abstract
             }
         }
 
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'session.hash_bits_per_character' is removed since PHP 7.1", E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'session.hash_bits_per_character' is removed since PHP 7.1\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $hashBitsPerChar = ini_get('session.hash_bits_per_character');
         if (!$hashBitsPerChar) {
             $hashBitsPerChar = 5; // the default value

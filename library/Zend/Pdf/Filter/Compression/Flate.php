@@ -47,20 +47,20 @@ class Zend_Pdf_Filter_Compression_Flate extends Zend_Pdf_Filter_Compression
         }
 
         if (extension_loaded('zlib')) {
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2", E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $trackErrors = ini_get( "track_errors");
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2", E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             ini_set('track_errors', '1');
 
             if (($output = @gzcompress($data)) === false) {
-                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2", E_USER_WARNING);
+                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                 ini_set('track_errors', $trackErrors);
                 require_once 'Zend/Pdf/Exception.php';
-                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: The variable '\$php_errormsg' is deprecated since PHP 7.2; Use error_get_last() instead", E_USER_WARNING);
+                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: The variable '\$php_errormsg' is deprecated since PHP 7.2; Use error_get_last() instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                 throw new Zend_Pdf_Exception($php_errormsg);
             }
 
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2", E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             ini_set('track_errors', $trackErrors);
         } else {
             require_once 'Zend/Pdf/Exception.php';
@@ -80,24 +80,24 @@ class Zend_Pdf_Filter_Compression_Flate extends Zend_Pdf_Filter_Compression
      */
     public static function decode($data, $params = null)
     {
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: The variable '\$php_errormsg' is deprecated since PHP 7.2; Use error_get_last() instead", E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: The variable '\$php_errormsg' is deprecated since PHP 7.2; Use error_get_last() instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         global $php_errormsg;
 
         if (extension_loaded('zlib')) {
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2", E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $trackErrors = ini_get( "track_errors");
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2", E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             ini_set('track_errors', '1');
 
             if (($output = @gzuncompress($data)) === false) {
-                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2", E_USER_WARNING);
+                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                 ini_set('track_errors', $trackErrors);
                 require_once 'Zend/Pdf/Exception.php';
-                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: The variable '\$php_errormsg' is deprecated since PHP 7.2; Use error_get_last() instead", E_USER_WARNING);
+                trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: The variable '\$php_errormsg' is deprecated since PHP 7.2; Use error_get_last() instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                 throw new Zend_Pdf_Exception($php_errormsg);
             }
 
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2", E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             ini_set('track_errors', $trackErrors);
         } else {
             require_once 'Zend/Pdf/Exception.php';

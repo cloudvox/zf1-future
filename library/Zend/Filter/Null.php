@@ -65,7 +65,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.", E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $options = func_get_args();
             $temp    = array();
             if (!empty($options)) {

@@ -74,7 +74,7 @@ class Zend_Amf_Util_BinaryStream
 
         $this->_stream       = $stream;
         $this->_needle       = 0;
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'mbstring.func_overload' is deprecated since PHP 7.2\n\tWARNING: INI directive 'mbstring.func_overload' is deprecated since PHP 7.2", E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'mbstring.func_overload' is deprecated since PHP 7.2\n\tWARNING: INI directive 'mbstring.func_overload' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $this->_mbStringFunctionsOverloaded = function_exists('mb_strlen') && (ini_get('mbstring.func_overload') !== '') && ((int)ini_get('mbstring.func_overload') & 2);
         $this->_streamLength = $this->_mbStringFunctionsOverloaded ? mb_strlen($stream, '8bit') : strlen($stream);
         $this->_bigEndian    = (pack('l', 1) === "\x00\x00\x00\x01");

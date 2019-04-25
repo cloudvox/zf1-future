@@ -81,7 +81,7 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
             return random_bytes($length);
         }
         if (function_exists('mcrypt_create_iv')) {
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_create_iv() is deprecated since PHP 7.1 and removed since PHP 7.2; Use random_bytes() or OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\tERROR: The constant \"MCRYPT_DEV_URANDOM\" is deprecated since PHP 7.1 and removed since PHP 7.2", E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_create_iv() is deprecated since PHP 7.1 and removed since PHP 7.2; Use random_bytes() or OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\tERROR: The constant \"MCRYPT_DEV_URANDOM\" is deprecated since PHP 7.1 and removed since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $bytes = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
             if ($bytes !== false && strlen($bytes) === $length) {
                 return $bytes;

@@ -302,7 +302,7 @@ abstract class Zend_Gdata_App_Base
     {
         if ($xml) {
             // Load the feed as an XML DOMDocument object
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2", E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             @ini_set('track_errors', 1);
             $doc = new DOMDocument();
             $doc = @Zend_Xml_Security::scan($xml, $doc);
