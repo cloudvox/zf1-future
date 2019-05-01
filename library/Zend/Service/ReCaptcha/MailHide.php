@@ -93,6 +93,9 @@ class Zend_Service_ReCaptcha_MailHide extends Zend_Service_ReCaptcha
      */
     public function __construct($publicKey = null, $privateKey = null, $email = null, $options = null)
     {
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_MODE_CBC\" is deprecated since PHP 7.1 and removed since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_RIJNDAEL_128\" is deprecated since PHP 7.1 and removed since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+
         /* Require the mcrypt extension to be loaded */
         $this->_requireMcrypt();
 
@@ -343,6 +346,7 @@ class Zend_Service_ReCaptcha_MailHide extends Zend_Service_ReCaptcha
         $emailPadded = str_pad($this->_email, strlen($this->_email) + $numPad, chr($numPad));
 
         /* Encrypt the email */
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_encrypt() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $emailEncrypted = mcrypt_encrypt(self::ENCRYPTION_CIPHER, $this->_privateKeyPacked, $emailPadded, self::ENCRYPTION_MODE, self::ENCRYPTION_IV);
 
         /* Return the url */

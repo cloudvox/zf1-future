@@ -1075,6 +1075,7 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     public function testInvalidPreexistingSessionIdDoesNotPreventRegenerationOfSid()
     {
         // Pattern: [0-9a-v]*
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: INI directive 'session.hash_bits_per_character' is removed since PHP 7.1\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         ini_set('session.hash_bits_per_character', 5);
 
         // Session store

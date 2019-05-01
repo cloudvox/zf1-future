@@ -991,6 +991,7 @@ class Zend_Ldap
             throw new Zend_Ldap_Exception($this, 'searching: ' . $filter);
         }
         if ($sort !== null && is_string($sort)) {
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: Function ldap_sort() is deprecated since PHP 7.0\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $isSorted = @ldap_sort($this->getResource(), $search, $sort);
             if($isSorted === false) {
                 /**
