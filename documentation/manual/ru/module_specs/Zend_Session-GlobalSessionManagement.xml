@@ -97,6 +97,7 @@ Zend_Session::setOptions($config->toArray());
 ; gc_maxlifetime
 ; gc_probability
 ; hash_bits_per_character
+; sid_bits_per_character
 ; hash_function
 ; имя должно быть уникальным для всех приложений, использующих
 ; одно и то же доменное имя

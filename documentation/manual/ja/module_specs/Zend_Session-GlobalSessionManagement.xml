@@ -69,6 +69,7 @@
 ; gc_maxlifetime
 ; gc_probability
 ; hash_bits_per_character
+; sid_bits_per_character
 ; hash_function
 ; name は、同じドメインを共有する PHP アプリケーション間で一意でなければなりません
 name = UNIQUE_NAME

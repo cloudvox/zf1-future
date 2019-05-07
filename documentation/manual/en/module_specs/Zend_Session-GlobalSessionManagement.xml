@@ -64,6 +64,7 @@
 ; gc_maxlifetime
 ; gc_probability
 ; hash_bits_per_character
+; sid_bits_per_character
 ; hash_function
 ; name should be unique for each PHP application sharing the same
 ; domain name

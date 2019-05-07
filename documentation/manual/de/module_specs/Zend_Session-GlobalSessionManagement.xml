@@ -69,6 +69,7 @@
 ; gc_maxlifetime
 ; gc_probability
 ; hash_bits_per_character
+; sid_bits_per_character
 ; hash_function
 ; name sollte für jede PHP Anwendung eindeutig sein und den
 ; selben Domain Namen verwenden

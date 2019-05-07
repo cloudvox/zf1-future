@@ -115,7 +115,8 @@ class Zend_Session extends Zend_Session_Abstract
         'bug_compat_42'             => null,
         'bug_compat_warn'           => null,
         'hash_function'             => null,
-        'hash_bits_per_character'   => null
+        'hash_bits_per_character'   => null,
+        'sid_bits_per_character'    => null
     );
 
     /**
@@ -531,13 +532,13 @@ class Zend_Session extends Zend_Session_Abstract
             }
         }
 
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'session.hash_bits_per_character' is removed since PHP 7.1\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
-        $hashBitsPerChar = ini_get('session.hash_bits_per_character');
-        if (!$hashBitsPerChar) {
-            $hashBitsPerChar = 5; // the default value
+        $ini_param = (PHP_VERSION_ID >= 70100) ? 'session.sid_bits_per_character' : 'session.hash_bits_per_character';
+        $bitsPerChar = ini_get($ini_param);
+        if (!$bitsPerChar) {
+            $bitsPerChar = 5; // the default value
         }
         $pattern = '';
-        switch($hashBitsPerChar) {
+        switch ($bitsPerChar) {
             case 4: $pattern = '^[0-9a-f]*$'; break;
             case 5: $pattern = '^[0-9a-v]*$'; break;
             case 6: $pattern = '^[0-9a-zA-Z-,]*$'; break;
