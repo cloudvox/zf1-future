@@ -72,11 +72,11 @@ class Zend_Service_Audioscrobbler
         $this->set('version', '1.0');
 
         if (PHP_VERSION_ID < 50600) {
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             iconv_set_encoding('output_encoding', 'UTF-8');
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             iconv_set_encoding('input_encoding', 'UTF-8');
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: All previously accepted values for the \$type parameter of iconv_set_encoding() have been deprecated since PHP 5.6.".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             iconv_set_encoding('internal_encoding', 'UTF-8');
         } else {
             ini_set('output_encoding', 'UTF-8');

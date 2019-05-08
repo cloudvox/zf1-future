@@ -155,7 +155,7 @@ x-amz-date:Tue, 27 Mar 2007 21:20:26 +0000
         $headers['Content-MD5'] = "4gJE4saaMU4BqNR0kLY+lw==";
         $headers['X-Amz-Meta-ReviewedBy'][] = "joe@johnsmith.net";
         $headers['X-Amz-Meta-ReviewedBy'][] = "jane@johnsmith.net";
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The behaviour of hexadecimal numeric strings was inconsistent prior to PHP 7 and support has been removed in PHP 7.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The behaviour of hexadecimal numeric strings was inconsistent prior to PHP 7 and support has been removed in PHP 7.".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $headers['X-Amz-Meta-FileChecksum'] = "0x02661779";
         $headers['X-Amz-Meta-ChecksumAlgorithm'] = "crc32";
         $headers['Content-Disposition'] = "attachment; filename=database.dat";

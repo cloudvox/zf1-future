@@ -41,7 +41,7 @@ class Zend_Tool_Framework_Client_Config
      */
     public function __config($options = array())
     {
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: Method name \"Zend_Tool_Framework_Client_Config::__config\" is discouraged; PHP has reserved all method names with a double underscore prefix for future use.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: Method name \"Zend_Tool_Framework_Client_Config::__config\" is discouraged; PHP has reserved all method names with a double underscore prefix for future use.".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         if ($options) {
             $this->setOptions($options);
         }

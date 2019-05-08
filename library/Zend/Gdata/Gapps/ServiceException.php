@@ -161,7 +161,7 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
             // track_errors is temporarily enabled so that if an error
             // occurs while parsing the XML we can append it to an
             // exception by referencing $php_errormsg
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             @ini_set('track_errors', 1);
             $doc = new DOMDocument();
             $doc = @Zend_Xml_Security::scan($string, $doc);

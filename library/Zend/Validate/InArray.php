@@ -79,12 +79,12 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
             $count = func_num_args();
             $temp  = array();
             if ($count > 1) {
-                trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Since PHP 7.0, functions inspecting arguments, like func_get_arg(), no longer report the original value as passed to a parameter, but will instead provide the current value.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+                trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Since PHP 7.0, functions inspecting arguments, like func_get_arg(), no longer report the original value as passed to a parameter, but will instead provide the current value.".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                 $temp['haystack'] = func_get_arg(0);
                 $temp['strict']   = func_get_arg(1);
                 $options = $temp;
             } else {
-                trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Since PHP 7.0, functions inspecting arguments, like func_get_arg(), no longer report the original value as passed to a parameter, but will instead provide the current value.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+                trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Since PHP 7.0, functions inspecting arguments, like func_get_arg(), no longer report the original value as passed to a parameter, but will instead provide the current value.".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                 $temp = func_get_arg(0);
                 if (!array_key_exists('haystack', $options)) {
                     $options = array();

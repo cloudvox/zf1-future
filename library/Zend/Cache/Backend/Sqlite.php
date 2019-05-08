@@ -100,7 +100,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
      */
     public function __destruct()
     {
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         @sqlite_close($this->_getConnection());
     }
 
@@ -119,7 +119,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
             $sql = $sql . " AND (expire=0 OR expire>" . time() . ')';
         }
         $result = $this->_query($sql);
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $row = @sqlite_fetch_array($result);
         if ($row) {
             return $row['content'];
@@ -138,7 +138,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         $this->_checkAndBuildStructure();
         $sql = "SELECT lastModified FROM cache WHERE id='$id' AND (expire=0 OR expire>" . time() . ')';
         $result = $this->_query($sql);
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $row = @sqlite_fetch_array($result);
         if ($row) {
             return ((int) $row['lastModified']);
@@ -163,7 +163,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     {
         $this->_checkAndBuildStructure();
         $lifetime = $this->getLifetime($specificLifetime);
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $data = @sqlite_escape_string($data);
         $mktime = time();
         if ($lifetime === null) {
@@ -195,7 +195,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     {
         $this->_checkAndBuildStructure();
         $res = $this->_query("SELECT COUNT(*) AS nbr FROM cache WHERE id='$id'");
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $result1 = @sqlite_fetch_single($res);
         $result2 = $this->_query("DELETE FROM cache WHERE id='$id'");
         $result3 = $this->_query("DELETE FROM tag WHERE id='$id'");
@@ -238,7 +238,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         $this->_checkAndBuildStructure();
         $res = $this->_query("SELECT id FROM cache WHERE (expire=0 OR expire>" . time() . ")");
         $result = array();
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         while ($id = @sqlite_fetch_single($res)) {
             $result[] = $id;
         }
@@ -255,7 +255,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         $this->_checkAndBuildStructure();
         $res = $this->_query("SELECT DISTINCT(name) AS name FROM tag");
         $result = array();
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         while ($id = @sqlite_fetch_single($res)) {
             $result[] = $id;
         }
@@ -279,7 +279,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
             if (!$res) {
                 return array();
             }
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $rows = @sqlite_fetch_all($res, SQLITE_ASSOC);
             $ids2 = array();
             foreach ($rows as $row) {
@@ -310,7 +310,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     public function getIdsNotMatchingTags($tags = array())
     {
         $res = $this->_query("SELECT id FROM cache");
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $rows = @sqlite_fetch_all($res, SQLITE_ASSOC);
         $result = array();
         foreach ($rows as $row) {
@@ -321,7 +321,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
                 if (!$res) {
                     return array();
                 }
-                trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+                trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                 $nbr = (int) @sqlite_fetch_single($res);
                 if ($nbr > 0) {
                     $matching = true;
@@ -351,7 +351,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
             if (!$res) {
                 return array();
             }
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $rows = @sqlite_fetch_all($res, SQLITE_ASSOC);
             $ids2 = array();
             foreach ($rows as $row) {
@@ -408,7 +408,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         $tags = array();
         $res = $this->_query("SELECT name FROM tag WHERE id='$id'");
         if ($res) {
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $rows = @sqlite_fetch_all($res, SQLITE_ASSOC);
             foreach ($rows as $row) {
                 $tags[] = $row['name'];
@@ -419,7 +419,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         if (!$res) {
             return false;
         }
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $row = @sqlite_fetch_array($res, SQLITE_ASSOC);
         return array(
             'tags' => $tags,
@@ -442,7 +442,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         if (!$res) {
             return false;
         }
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $expire = @sqlite_fetch_single($res);
         $newExpire = $expire + $extraLifetime;
         $res = $this->_query("UPDATE cache SET lastModified=" . time() . ", expire=$newExpire WHERE id='$id'");
@@ -505,7 +505,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         if (is_resource($this->_db)) {
             return $this->_db;
         } else {
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $this->_db = @sqlite_open($this->_options['cache_db_complete_path']);
             if (!(is_resource($this->_db))) {
                 Zend_Cache::throwException("Impossible to open " . $this->_options['cache_db_complete_path'] . " cache DB file");
@@ -524,7 +524,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     {
         $db = $this->_getConnection();
         if (is_resource($db)) {
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $res = @sqlite_query($db, $query);
             if ($res === false) {
                 return false;
@@ -598,7 +598,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     {
         $result = $this->_query("SELECT num FROM version");
         if (!$result) return false;
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'sqlite' is removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $row = @sqlite_fetch_array($result);
         if (!$row) {
             return false;
