@@ -1273,12 +1273,13 @@ class Zend_Http_Client
         }
         // If mbstring overloads substr and strlen functions, we have to
         // override it's internal encoding
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'mbstring.func_overload' is deprecated since PHP 7.2".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
-        if (function_exists('mb_internal_encoding') &&
-           ((int) ini_get('mbstring.func_overload')) & 2) {
+        if (function_exists('mb_internal_encoding')) {
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'mbstring.func_overload' is deprecated since PHP 7.2".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            if (((int) ini_get('mbstring.func_overload')) & 2) {
 
-            $mbIntEnc = mb_internal_encoding();
-            mb_internal_encoding('ASCII');
+                $mbIntEnc = mb_internal_encoding();
+                mb_internal_encoding('ASCII');
+            }
         }
 
         // If we have raw_post_data set, just use it as the body.
