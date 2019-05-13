@@ -48,7 +48,7 @@ class Zend_Search_Lucene_Storage_File_Filesystem extends Zend_Search_Lucene_Stor
      */
     public function __construct($filename, $mode='r+b')
     {
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: The variable '\$php_errormsg' is deprecated since PHP 7.2; Use error_get_last() instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: The variable '\$php_errormsg' is deprecated since PHP 7.2; Use error_get_last() instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         global $php_errormsg;
 
         if (strpos($mode, 'w') === false  &&  !is_readable($filename)) {
@@ -57,22 +57,22 @@ class Zend_Search_Lucene_Storage_File_Filesystem extends Zend_Search_Lucene_Stor
             throw new Zend_Search_Lucene_Exception('File \'' . $filename . '\' is not readable.');
         }
 
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $trackErrors = ini_get('track_errors');
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         ini_set('track_errors', '1');
 
         $this->_fileHandle = @fopen($filename, $mode);
 
         if ($this->_fileHandle === false) {
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             ini_set('track_errors', $trackErrors);
             require_once 'Zend/Search/Lucene/Exception.php';
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: The variable '\$php_errormsg' is deprecated since PHP 7.2; Use error_get_last() instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: The variable '\$php_errormsg' is deprecated since PHP 7.2; Use error_get_last() instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             throw new Zend_Search_Lucene_Exception($php_errormsg);
         }
 
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'track_errors' is deprecated since PHP 7.2".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         ini_set('track_errors', $trackErrors);
     }
 

@@ -123,21 +123,21 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
         }
 
         $options = $options + $this->getEncryption();
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_list_algorithms() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_list_algorithms() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $algorithms = mcrypt_list_algorithms($options['algorithm_directory']);
         if (!in_array($options['algorithm'], $algorithms)) {
             require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("The algorithm '{$options['algorithm']}' is not supported");
         }
 
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_list_modes() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_list_modes() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $modes = mcrypt_list_modes($options['mode_directory']);
         if (!in_array($options['mode'], $modes)) {
             require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("The mode '{$options['mode']}' is not supported");
         }
 
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_module_self_test() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_module_self_test() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         if (!mcrypt_module_self_test($options['algorithm'], $options['algorithm_directory'])) {
             require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('The given algorithm can not be used due an internal mcrypt problem');
@@ -172,26 +172,26 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
     public function setVector($vector = null)
     {
         $cipher = $this->_openCipher();
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_enc_get_iv_size() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_enc_get_iv_size() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $size   = mcrypt_enc_get_iv_size($cipher);
         if (empty($vector)) {
             $this->_srand();
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' && version_compare(PHP_VERSION, '5.3.0', '<')) {
-                trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_RAND\" is deprecated since PHP 7.1 and removed since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+                trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_RAND\" is deprecated since PHP 7.1 and removed since PHP 7.2".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                 $method = MCRYPT_RAND;
             } else {
                 if (file_exists('/dev/urandom') || (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')) {
-                    trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_DEV_URANDOM\" is deprecated since PHP 7.1 and removed since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+                    trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_DEV_URANDOM\" is deprecated since PHP 7.1 and removed since PHP 7.2".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                     $method = MCRYPT_DEV_URANDOM;
                 } elseif (file_exists('/dev/random')) {
-                    trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_DEV_RANDOM\" is deprecated since PHP 7.1 and removed since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+                    trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_DEV_RANDOM\" is deprecated since PHP 7.1 and removed since PHP 7.2".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                     $method = MCRYPT_DEV_RANDOM;
                 } else {
-                    trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_RAND\" is deprecated since PHP 7.1 and removed since PHP 7.2\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+                    trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The constant \"MCRYPT_RAND\" is deprecated since PHP 7.1 and removed since PHP 7.2".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                     $method = MCRYPT_RAND;
                 }
             }
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_create_iv() is deprecated since PHP 7.1 and removed since PHP 7.2; Use random_bytes() or OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_create_iv() is deprecated since PHP 7.1 and removed since PHP 7.2; Use random_bytes() or OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $vector = mcrypt_create_iv($size, $method);
         } else if (strlen($vector) != $size) {
             require_once 'Zend/Filter/Exception.php';
@@ -249,9 +249,9 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
 
         $cipher  = $this->_openCipher();
         $this->_initCipher($cipher);
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_generic() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_generic() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $encrypted = mcrypt_generic($cipher, $value);
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_generic_deinit() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_generic_deinit() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         mcrypt_generic_deinit($cipher);
         $this->_closeCipher($cipher);
 
@@ -270,9 +270,9 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
     {
         $cipher = $this->_openCipher();
         $this->_initCipher($cipher);
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mdecrypt_generic() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mdecrypt_generic() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $decrypted = mdecrypt_generic($cipher, $value);
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_generic_deinit() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_generic_deinit() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         mcrypt_generic_deinit($cipher);
         $this->_closeCipher($cipher);
 
@@ -304,7 +304,7 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
      */
     protected function _openCipher()
     {
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_module_open() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_module_open() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $cipher = mcrypt_module_open(
             $this->_encryption['algorithm'],
             $this->_encryption['algorithm_directory'],
@@ -327,7 +327,7 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
      */
     protected function _closeCipher($cipher)
     {
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_module_close() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_module_close() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         mcrypt_module_close($cipher);
 
         return $this;
@@ -344,11 +344,11 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
     {
         $key = $this->_encryption['key'];
 
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_enc_get_supported_key_sizes() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_enc_get_supported_key_sizes() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $keysizes = mcrypt_enc_get_supported_key_sizes($cipher);
         if (empty($keysizes) || ($this->_encryption['salt'] == true)) {
             $this->_srand();
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_enc_get_key_size() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_enc_get_key_size() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $keysize = mcrypt_enc_get_key_size($cipher);
             $key     = substr(md5($key), 0, $keysize);
         } else if (!in_array(strlen($key), $keysizes)) {
@@ -356,7 +356,7 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
             throw new Zend_Filter_Exception('The given key has a wrong size for the set algorithm');
         }
 
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_generic_init() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Function mcrypt_generic_init() is deprecated since PHP 7.1 and removed since PHP 7.2; Use OpenSSL instead\n\tERROR: Extension 'mcrypt' is deprecated since PHP 7.1 and removed since PHP 7.2; Use openssl (preferred) or pecl\/mcrypt once available instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $result = mcrypt_generic_init($cipher, $key, $this->_encryption['vector']);
         if ($result < 0) {
             require_once 'Zend/Filter/Exception.php';

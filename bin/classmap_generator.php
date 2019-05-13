@@ -229,7 +229,7 @@ foreach ($matches as $match) {
     $maxWidth = max($maxWidth, strlen($match[1]));
 }
 
-trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: preg_replace() - \/e modifier is deprecated since PHP 5.5 and removed since PHP 7.0\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: preg_replace() - \/e modifier is deprecated since PHP 5.5 and removed since PHP 7.0".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
 $content = preg_replace('(\n\s+([^=]+)=>)e', "'\n    \\1' . str_repeat(' ', " . $maxWidth . " - strlen('\\1')) . '=>'", $content);
 
 // Make the file end by EOL

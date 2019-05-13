@@ -89,7 +89,7 @@ class Zend_Filter_DigitsTest extends PHPUnit_Framework_TestCase
         } else {
             // POSIX named classes are not supported, use alternative 0-9 match
             // Or filter for the value without mbstring
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The behaviour of hexadecimal numeric strings was inconsistent prior to PHP 7 and support has been removed in PHP 7.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: The behaviour of hexadecimal numeric strings was inconsistent prior to PHP 7 and support has been removed in PHP 7.".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $valuesExpected = array(
                 'abc123'  => '123',
                 'abc 123' => '123',

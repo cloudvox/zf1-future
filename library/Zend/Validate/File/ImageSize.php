@@ -130,7 +130,7 @@ class Zend_Validate_File_ImageSize extends Zend_Validate_Abstract
             if (!is_array($options)) {
                 $options = array('minwidth' => $options);
             }
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $argv = func_get_args();
             array_shift($argv);
             $options['minheight'] = array_shift($argv);
