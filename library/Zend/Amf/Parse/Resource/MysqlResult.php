@@ -50,19 +50,19 @@ class Zend_Amf_Parse_Resource_MysqlResult
      */
     public function parse($resource) {
         $result = array();
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'mysql_' is deprecated since PHP 5.5 and removed since PHP 7.0; Use mysqli instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert ERROR: Extension 'mysql_' is deprecated since PHP 5.5 and removed since PHP 7.0; Use mysqli instead".sprintf(" (%s::%s)", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $fieldcnt = mysql_num_fields($resource);
         $fields_transform = array();
         for($i=0;$i<$fieldcnt;$i++) {
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'mysql_' is deprecated since PHP 5.5 and removed since PHP 7.0; Use mysqli instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert ERROR: Extension 'mysql_' is deprecated since PHP 5.5 and removed since PHP 7.0; Use mysqli instead".sprintf(" (%s::%s)", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $type = mysql_field_type($resource, $i);
             if(isset(self::$fieldTypes[$type])) {
-                trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'mysql_' is deprecated since PHP 5.5 and removed since PHP 7.0; Use mysqli instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+                trigger_error("PHP 7.2 Compatibility Alert ERROR: Extension 'mysql_' is deprecated since PHP 5.5 and removed since PHP 7.0; Use mysqli instead".sprintf(" (%s::%s)", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
                 $fields_transform[mysql_field_name($resource, $i)] = self::$fieldTypes[$type];
             }
         }
 
-        trigger_error("PHP 7.2 Compatibility Alert:\n\tERROR: Extension 'mysql_' is deprecated since PHP 5.5 and removed since PHP 7.0; Use mysqli instead".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+        trigger_error("PHP 7.2 Compatibility Alert ERROR: Extension 'mysql_' is deprecated since PHP 5.5 and removed since PHP 7.0; Use mysqli instead".sprintf(" (%s::%s)", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         while($row = mysql_fetch_object($resource)) {
             foreach($fields_transform as $fieldname => $fieldtype) {
                settype($row->$fieldname, $fieldtype);

@@ -166,7 +166,7 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
     {
         if (version_compare(PHP_VERSION, '5.3.0', '<')
             && null === $this->_magicfile) {
-            trigger_error("PHP 7.2 Compatibility Alert:\n\tWARNING: INI directive 'safe_mode' is deprecated since PHP 5.3 and removed since PHP 5.4\n\tWARNING: INI directive 'safe_mode' is deprecated since PHP 5.3 and removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__)."\n\t".implode("\n\t", array_map(function ($item) { return sprintf("%s::%s", $item['file'], $item['line']); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
+            trigger_error("PHP 7.2 Compatibility Alert WARNING: INI directive 'safe_mode' is deprecated since PHP 5.3 and removed since PHP 5.4\n\tWARNING: INI directive 'safe_mode' is deprecated since PHP 5.3 and removed since PHP 5.4".sprintf(" (%s::%s)", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             if (!empty($_ENV['MAGIC'])) {
                 $this->setMagicFile($_ENV['MAGIC']);
             } elseif (
