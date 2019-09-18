@@ -345,7 +345,7 @@ class Zend_Log
     protected function _packEvent($message, $priority)
     {
         return array_merge(array(
-            'timestamp'    => date($this->_timestampFormat),
+            'timestamp'    => date_format(new DateTime(), $this->_timestampFormat),
             'message'      => $message,
             'priority'     => $priority,
             'priorityName' => $this->_priorities[$priority]
