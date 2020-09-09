@@ -220,6 +220,7 @@ function concatenatePdfFilenames($inputFilenames, $outputFilename, $processor = 
 
         case PROCESSOR_PDFTK :
             $format  = '%s %s cat output %s';
+            trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert WARNING: Passing the \$glue and \$pieces parameters in reverse order to implode has been deprecated since PHP 7.4; \$glue should be the first parameter and \$pieces the second", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $command = sprintf($format, EXEC_PDFTK, implode($inputFilenames, ' '), $outputFilename);
         break;        
         
@@ -229,6 +230,7 @@ function concatenatePdfFilenames($inputFilenames, $outputFilename, $processor = 
             $format .= '-dColorImageFilter=/FlateEncode -dCompatibilityLevel=1.3 -dEmbedAllFonts=true ';
             $format .= '-dGrayImageFilter=/FlateEncode -dMaxSubsetPct=100 -dMonoImageFilter=/CCITTFaxEncode ';
             $format .= '-dSubsetFonts=true -sOUTPUTFILE=%s %s';
+            trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert WARNING: Passing the \$glue and \$pieces parameters in reverse order to implode has been deprecated since PHP 7.4; \$glue should be the first parameter and \$pieces the second", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $command = sprintf($format, EXEC_GHOSTSCRIPT, $outputFilename, implode($inputFilenames, ' '));
         break;
             

@@ -118,6 +118,7 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
      */
     public function testLoaderClassValid()
     {
+        trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert WARNING: Passing the \$glue and \$pieces parameters in reverse order to implode has been deprecated since PHP 7.4; \$glue should be the first parameter and \$pieces the second", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $dir = implode([dirname(__FILE__), '_files', '_testDir1'], DIRECTORY_SEPARATOR);
 
         Zend_Loader::loadClass('Class1', $dir);
@@ -148,6 +149,7 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
      */
     public function testLoaderClassNonexistent()
     {
+        trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert WARNING: Passing the \$glue and \$pieces parameters in reverse order to implode has been deprecated since PHP 7.4; \$glue should be the first parameter and \$pieces the second", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $dir = implode([dirname(__FILE__), '_files', '_testDir1'], DIRECTORY_SEPARATOR);
 
         try {
@@ -179,6 +181,7 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
     {
         $dirs = [];
         foreach (['_testDir1', '_testDir2'] as $dir) {
+            trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert WARNING: Passing the \$glue and \$pieces parameters in reverse order to implode has been deprecated since PHP 7.4; \$glue should be the first parameter and \$pieces the second", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $dirs[] = implode([dirname(__FILE__), '_files', $dir], DIRECTORY_SEPARATOR);
         }
 
@@ -194,6 +197,7 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
     {
         $dirs = [];
         foreach (['_testDir1', '_testDir2'] as $dir) {
+            trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert WARNING: Passing the \$glue and \$pieces parameters in reverse order to implode has been deprecated since PHP 7.4; \$glue should be the first parameter and \$pieces the second", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $dirs[] = implode([dirname(__FILE__), '_files', $dir], DIRECTORY_SEPARATOR);
         }
 
@@ -220,6 +224,7 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
     public function testLoaderFileIncludePathEmptyDirs()
     {
         $saveIncludePath = get_include_path();
+        trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert WARNING: Passing the \$glue and \$pieces parameters in reverse order to implode has been deprecated since PHP 7.4; \$glue should be the first parameter and \$pieces the second", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         set_include_path(implode([$saveIncludePath, implode([dirname(__FILE__), '_files', '_testDir1'], DIRECTORY_SEPARATOR)], PATH_SEPARATOR));
 
         $this->assertTrue(Zend_Loader::loadFile('Class3.php', null));
@@ -234,6 +239,7 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
     public function testLoaderFileIncludePathNonEmptyDirs()
     {
         $saveIncludePath = get_include_path();
+        trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert WARNING: Passing the \$glue and \$pieces parameters in reverse order to implode has been deprecated since PHP 7.4; \$glue should be the first parameter and \$pieces the second", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         set_include_path(implode([$saveIncludePath, implode([dirname(__FILE__), '_files', '_testDir1'], DIRECTORY_SEPARATOR)], PATH_SEPARATOR));
 
         $this->assertTrue(Zend_Loader::loadFile('Class4.php', implode(PATH_SEPARATOR, ['foo', 'bar'])));

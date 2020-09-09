@@ -689,6 +689,7 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
         // keep in mind that some queue services are on forigen machines and need network time.
 
         if (false) { // easy comment/uncomment, set to true or false
+            trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert WARNING: Using an unparenthesized expression containing a \".\" before a \"+\" or \"-\" has been deprecated in PHP 7.4", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $this->markTestSkipped('Visibility testing takes ' . $default_timeout+$extra_delay . ' seconds per adapter, if you wish to test this, uncomment the test case in ' . __FILE__ . ' line ' . __LINE__);
             return;
         }

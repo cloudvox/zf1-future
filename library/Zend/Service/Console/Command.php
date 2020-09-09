@@ -220,6 +220,7 @@ class Zend_Service_Console_Command
 
 			for ($hi = 0; $hi < count($handlers); $hi++) {
 				$handler = $handlers[$hi];
+				trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert WARNING: The left-associativity of the ternary operator has been deprecated in PHP 7.4. Multiple consecutive ternaries detected. Use parenthesis to clarify the order in which the operations should be executed", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
 				$handlerDescription = isset($handlerDescriptions[$hi]) ? $handlerDescriptions[$hi] : isset($handlerDescriptions[0]) ? $handlerDescriptions[0] : '';
 				$handlerDescription = str_replace('\r\n', "\r\n", $handlerDescription);
 				$handlerDescription = str_replace('\n', "\n", $handlerDescription);
