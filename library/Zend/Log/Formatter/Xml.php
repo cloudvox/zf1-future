@@ -55,7 +55,7 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
      * @param array|Zend_Config $options
      * @return void
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
@@ -63,9 +63,9 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
             trigger_error("PHP 7.2 Compatibility Alert ERROR: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.".sprintf(" (%s::%s)", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $args = func_get_args();
 
-            $options = array(
+            $options = [
             	'rootElement' => array_shift($args)
-            );
+            ];
 
             if (count($args)) {
                 $options['elementMap'] = array_shift($args);
@@ -136,7 +136,7 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
         if ($this->_elementMap === null) {
             $dataToInsert = $event;
         } else {
-            $dataToInsert = array();
+            $dataToInsert = [];
             foreach ($this->_elementMap as $elementName => $fieldKey) {
                 $dataToInsert[$elementName] = $event[$fieldKey];
             }

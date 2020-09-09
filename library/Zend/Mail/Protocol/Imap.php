@@ -182,8 +182,8 @@ class Zend_Mail_Protocol_Imap
      */
     protected function _decodeLine($line)
     {
-        $tokens = array();
-        $stack = array();
+        $tokens = [];
+        $stack = [];
 
         /*
             We start to decode the response here. The unterstood tokens are:
@@ -205,7 +205,7 @@ class Zend_Mail_Protocol_Imap
             $token = substr($line, 0, $pos);
             while ($token[0] == '(') {
                 array_push($stack, $tokens);
-                $tokens = array();
+                $tokens = [];
                 $token = substr($token, 1);
             }
             if ($token[0] == '"') {
@@ -280,7 +280,7 @@ class Zend_Mail_Protocol_Imap
      * @return bool if returned tag matches wanted tag
      * @throws Zend_Mail_Protocol_Exception
      */
-    public function readLine(&$tokens = array(), $wantedTag = '*', $dontParse = false)
+    public function readLine(&$tokens = [], $wantedTag = '*', $dontParse = false)
     {
         $line = $this->_nextTaggedLine($tag);
         if (!$dontParse) {
@@ -306,14 +306,14 @@ class Zend_Mail_Protocol_Imap
      */
     public function readResponse($tag, $dontParse = false)
     {
-        $lines = array();
+        $lines = [];
         while (!$this->readLine($tokens, $tag, $dontParse)) {
             $lines[] = $tokens;
         }
 
         if ($dontParse) {
             // last to chars are still needed for response code
-            $tokens = array(substr($tokens, 0, 2));
+            $tokens = [substr($tokens, 0, 2)];
         }
         // last line has response code
         if ($tokens[0] == 'OK') {
@@ -333,7 +333,7 @@ class Zend_Mail_Protocol_Imap
      * @return null
      * @throws Zend_Mail_Protocol_Exception
      */
-    public function sendRequest($command, $tokens = array(), &$tag = null)
+    public function sendRequest($command, $tokens = [], &$tag = null)
     {
         if (!$tag) {
             ++$this->_tagCount;
@@ -382,7 +382,7 @@ class Zend_Mail_Protocol_Imap
      * @return mixed response as in readResponse()
      * @throws Zend_Mail_Protocol_Exception
      */
-    public function requestAndResponse($command, $tokens = array(), $dontParse = false)
+    public function requestAndResponse($command, $tokens = [], $dontParse = false)
     {
         $this->sendRequest($command, $tokens, $tag);
         $response = $this->readResponse($tag, $dontParse);
@@ -401,12 +401,12 @@ class Zend_Mail_Protocol_Imap
     {
         if (func_num_args() < 2) {
             if (strpos($string, "\n") !== false) {
-                return array('{' . strlen($string) . '}', $string);
+                return ['{' . strlen($string) . '}', $string];
             } else {
-                return '"' . str_replace(array('\\', '"'), array('\\\\', '\\"'), $string) . '"';
+                return '"' . str_replace(['\\', '"'], ['\\\\', '\\"'], $string) . '"';
             }
         }
-        $result = array();
+        $result = [];
         trigger_error("PHP 7.2 Compatibility Alert WARNING: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.".sprintf(" (%s::%s)", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         foreach (func_get_args() as $string) {
             $result[] = $this->escapeString($string);
@@ -422,7 +422,7 @@ class Zend_Mail_Protocol_Imap
      */
     public function escapeList($list)
     {
-        $result = array();
+        $result = [];
         foreach ($list as $k => $v) {
             if (!is_array($v)) {
 //              $result[] = $this->escapeString($v);
@@ -457,7 +457,7 @@ class Zend_Mail_Protocol_Imap
         $result = false;
         if ($this->_socket) {
             try {
-                $result = $this->requestAndResponse('LOGOUT', array(), true);
+                $result = $this->requestAndResponse('LOGOUT', [], true);
             } catch (Zend_Mail_Protocol_Exception $e) {
                 // ignoring exception
             }
@@ -482,7 +482,7 @@ class Zend_Mail_Protocol_Imap
             return $response;
         }
 
-        $capabilities = array();
+        $capabilities = [];
         foreach ($response as $line) {
             $capabilities = array_merge($capabilities, $line);
         }
@@ -501,9 +501,9 @@ class Zend_Mail_Protocol_Imap
      */
     public function examineOrSelect($command = 'EXAMINE', $box = 'INBOX')
     {
-        $this->sendRequest($command, array($this->escapeString($box)), $tag);
+        $this->sendRequest($command, [$this->escapeString($box)], $tag);
 
-        $result = array();
+        $result = [];
         while (!$this->readLine($tokens, $tag)) {
             if ($tokens[0] == 'FLAGS') {
                 array_shift($tokens);
@@ -582,9 +582,9 @@ class Zend_Mail_Protocol_Imap
         $items = (array)$items;
         $itemList = $this->escapeList($items);
 
-        $this->sendRequest('FETCH', array($set, $itemList), $tag);
+        $this->sendRequest('FETCH', [$set, $itemList], $tag);
 
-        $result = array();
+        $result = [];
         while (!$this->readLine($tokens, $tag)) {
             // ignore other responses
             if ($tokens[1] != 'FETCH') {
@@ -611,7 +611,7 @@ class Zend_Mail_Protocol_Imap
                     }
                 }
             } else {
-                $data = array();
+                $data = [];
                 while (key($tokens[2]) !== null) {
                     $data[current($tokens[2])] = next($tokens[2]);
                     next($tokens[2]);
@@ -649,7 +649,7 @@ class Zend_Mail_Protocol_Imap
      */
     public function listMailbox($reference = '', $mailbox = '*')
     {
-        $result = array();
+        $result = [];
         $list = $this->requestAndResponse('LIST', $this->escapeString($reference, $mailbox));
         if (!$list || $list === true) {
             return $result;
@@ -659,7 +659,7 @@ class Zend_Mail_Protocol_Imap
             if (count($item) != 4 || $item[0] != 'LIST') {
                 continue;
             }
-            $result[$item[3]] = array('delim' => $item[2], 'flags' => $item[1]);
+            $result[$item[3]] = ['delim' => $item[2], 'flags' => $item[1]];
         }
 
         return $result;
@@ -693,14 +693,14 @@ class Zend_Mail_Protocol_Imap
             $set .= ':' . ($to == INF ? '*' : (int)$to);
         }
 
-        $result = $this->requestAndResponse('STORE', array($set, $item, $flags), $silent);
+        $result = $this->requestAndResponse('STORE', [$set, $item, $flags], $silent);
 
         if ($silent) {
             return $result ? true : false;
         }
 
         $tokens = $result;
-        $result = array();
+        $result = [];
         foreach ($tokens as $token) {
             if ($token[1] != 'FETCH' || $token[2][0] != 'FLAGS') {
                 continue;
@@ -723,7 +723,7 @@ class Zend_Mail_Protocol_Imap
      */
     public function append($folder, $message, $flags = null, $date = null)
     {
-        $tokens = array();
+        $tokens = [];
         $tokens[] = $this->escapeString($folder);
         if ($flags !== null) {
             $tokens[] = $this->escapeList($flags);
@@ -752,7 +752,7 @@ class Zend_Mail_Protocol_Imap
             $set .= ':' . ($to == INF ? '*' : (int)$to);
         }
 
-        return $this->requestAndResponse('COPY', array($set, $this->escapeString($folder)), true);
+        return $this->requestAndResponse('COPY', [$set, $this->escapeString($folder)], true);
     }
 
     /**
@@ -763,7 +763,7 @@ class Zend_Mail_Protocol_Imap
      */
     public function create($folder)
     {
-        return $this->requestAndResponse('CREATE', array($this->escapeString($folder)), true);
+        return $this->requestAndResponse('CREATE', [$this->escapeString($folder)], true);
     }
 
     /**
@@ -786,7 +786,7 @@ class Zend_Mail_Protocol_Imap
      */
     public function delete($folder)
     {
-        return $this->requestAndResponse('DELETE', array($this->escapeString($folder)), true);
+        return $this->requestAndResponse('DELETE', [$this->escapeString($folder)], true);
     }
 
     /**
@@ -833,7 +833,7 @@ class Zend_Mail_Protocol_Imap
                 return $ids;
             }
         }
-        return array();
+        return [];
     }
 
 }

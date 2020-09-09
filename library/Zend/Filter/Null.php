@@ -39,14 +39,14 @@ class Zend_Filter_Null implements Zend_Filter_Interface
     const ZERO         = 16;
     const ALL          = 31;
 
-    protected $_constants = array(
+    protected $_constants = [
         self::BOOLEAN     => 'boolean',
         self::INTEGER     => 'integer',
         self::EMPTY_ARRAY => 'array',
         self::STRING      => 'string',
         self::ZERO        => 'zero',
         self::ALL         => 'all'
-    );
+    ];
 
     /**
      * Internal type to detect
@@ -67,7 +67,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
         } else if (!is_array($options)) {
             trigger_error("PHP 7.2 Compatibility Alert ERROR: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.".sprintf(" (%s::%s)", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $options = func_get_args();
-            $temp    = array();
+            $temp    = [];
             if (!empty($options)) {
                 $temp = array_shift($options);
             }
@@ -158,7 +158,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
         // EMPTY_ARRAY (array())
         if ($type >= self::EMPTY_ARRAY) {
             $type -= self::EMPTY_ARRAY;
-            if (is_array($value) && ($value == array())) {
+            if (is_array($value) && ($value == [])) {
                 return null;
             }
         }
