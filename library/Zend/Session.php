@@ -321,6 +321,7 @@ class Zend_Session extends Zend_Session_Abstract
         } else {
             if (!self::$_unitTestEnabled) {
                 session_regenerate_id(true);
+                setcookie('IFBYPHONE', self::getId(), 0, '/; SameSite=None; HttpOnly; Secure');
             }
             self::$_regenerateIdState = 1;
         }
@@ -484,6 +485,7 @@ class Zend_Session extends Zend_Session_Abstract
             }
 
             $startedCleanly = session_start();
+            setcookie('IFBYPHONE', self::getId(), 0, '/; SameSite=None; HttpOnly; Secure');
 
             if (self::$_throwStartupExceptions) {
                 restore_error_handler();
