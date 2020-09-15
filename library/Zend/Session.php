@@ -323,7 +323,7 @@ class Zend_Session extends Zend_Session_Abstract
                 session_regenerate_id(true);
 
                 // This can be removed once we update to 7.4 or above as then
-                // we can use php.ini directive to achieve the same `session.cookie_samesite=Lax`
+                // we can use php.ini directive to achieve the same `session.cookie_samesite=None`
                 if (version_compare(PHP_VERSION, '7.3.0', '<')) {
                     setcookie('IFBYPHONE', self::getId(), 0, '/; SameSite=None; HttpOnly; Secure');
                 }
@@ -492,7 +492,7 @@ class Zend_Session extends Zend_Session_Abstract
             $startedCleanly = session_start();
 
             // This can be removed once we update to 7.4 or above as then
-            // we can use php.ini directive to achieve the same `session.cookie_samesite=Lax`
+            // we can use php.ini directive to achieve the same `session.cookie_samesite=None`
             if (version_compare(PHP_VERSION, '7.3.0', '<')) {
                 setcookie('IFBYPHONE', self::getId(), 0, '/; SameSite=None; HttpOnly; Secure');
             }
