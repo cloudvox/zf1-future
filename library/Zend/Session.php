@@ -326,6 +326,14 @@ class Zend_Session extends Zend_Session_Abstract
                 // we can use php.ini directive to achieve the same `session.cookie_samesite=None`
                 if (version_compare(PHP_VERSION, '7.3.0', '<')) {
                     setcookie('IFBYPHONE', self::getId(), 0, '/; SameSite=None; HttpOnly; Secure');
+                } else {
+                    setcookie('IFBYPHONE', self::getId(), [
+                        'expires' => 0,
+                        'path' => '/',
+                        'secure' => true,
+                        'httponly' => true,
+                        'samesite' => 'None'
+                    ]);
                 }
             }
             self::$_regenerateIdState = 1;
@@ -495,6 +503,14 @@ class Zend_Session extends Zend_Session_Abstract
             // we can use php.ini directive to achieve the same `session.cookie_samesite=None`
             if (version_compare(PHP_VERSION, '7.3.0', '<')) {
                 setcookie('IFBYPHONE', self::getId(), 0, '/; SameSite=None; HttpOnly; Secure');
+            } else {
+                setcookie('IFBYPHONE', self::getId(), [
+                    'expires' => 0,
+                    'path' => '/',
+                    'secure' => true,
+                    'httponly' => true,
+                    'samesite' => 'None'
+                ]);
             }
 
             if (self::$_throwStartupExceptions) {
