@@ -323,7 +323,7 @@ class Zend_Session extends Zend_Session_Abstract
                 session_regenerate_id(true);
 
                 // Force Samesite cookie
-                $this->sameSiteCookieWorkaroundPrePhp74();
+                self::sameSiteCookieWorkaroundPrePhp74();
             }
             self::$_regenerateIdState = 1;
         }
@@ -489,7 +489,7 @@ class Zend_Session extends Zend_Session_Abstract
             $startedCleanly = session_start();
 
             // Force Samesite cookie
-            $this->sameSiteCookieWorkaroundPrePhp74();
+            self::sameSiteCookieWorkaroundPrePhp74();
 
             if (self::$_throwStartupExceptions) {
                 restore_error_handler();
