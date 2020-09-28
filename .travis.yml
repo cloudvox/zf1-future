@@ -1,47 +1,25 @@
+dist: trusty
 language: php
-
-sudo: false
-
 php:
-  - 5.2
-  - 5.3
-  - 5.4
-  - 5.5
-  - 5.6
   - 7.2
+  - 7.4
   - hhvm
-
-env: TMPDIR=/tmp
-
-install:
- - if [[ "$TRAVIS_PHP_VERSION" == "5.2" ]]; then sh ./tests/php52_install_dependencies.sh; fi
- - phpenv rehash
-
 services:
+  - mysql
   - memcached
-
-before_script:
-  - phpenv config-rm xdebug.ini || return 0
-  - if [[ "$TRAVIS_PHP_VERSION" != "5.2" ]]; then travis_retry composer self-update; fi
-  - if [[ "$TRAVIS_PHP_VERSION" != "5.2" ]]; then travis_retry composer install --no-interaction --prefer-source --dev; fi
-  
+env: TMPDIR=/tmp
+before_install:
   - mysql -e 'create database zftest;'
   - psql -c 'create database zftest;' -U postgres
-
-  - if [[ "$TRAVIS_PHP_VERSION" != "5.2" ]] && [[ "$TRAVIS_PHP_VERSION" != "hhvm" ]] && [[ "$TRAVIS_PHP_VERSION" != "7" ]]; then phpenv config-add tests/config.ini; fi
-  - if [[ "$TRAVIS_PHP_VERSION" == "5.2" ]]; then phpenv config-add tests/php52_config.ini; fi
-  - if [[ "$TRAVIS_PHP_VERSION" == "7" ]]; then phpenv config-add tests/php7_config.ini; fi
-
+install:
+ - composer install --no-interaction --prefer-source --dev
+ - phpenv rehash
+before_script: 
+  - phpenv config-add tests/php7_config.ini
   - cp ./tests/TestConfiguration.travis.php ./tests/TestConfiguration.php
-
 script:
  - cd tests/
  - php runalltests.php
- 
 matrix:
   allow_failures:
-   - php: 5.2
-   - php: 5.3
-   - php: 5.4
-   - php: 5.5
    - php: hhvm
