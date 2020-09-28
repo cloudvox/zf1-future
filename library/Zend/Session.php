@@ -321,6 +321,9 @@ class Zend_Session extends Zend_Session_Abstract
         } else {
             if (!self::$_unitTestEnabled) {
                 session_regenerate_id(true);
+
+                // Force Samesite cookie
+                self::sameSiteCookieWorkaroundPrePhp74();
             }
             self::$_regenerateIdState = 1;
         }
@@ -484,6 +487,9 @@ class Zend_Session extends Zend_Session_Abstract
             }
 
             $startedCleanly = session_start();
+
+            // Force Samesite cookie
+            self::sameSiteCookieWorkaroundPrePhp74();
 
             if (self::$_throwStartupExceptions) {
                 restore_error_handler();
@@ -912,6 +918,27 @@ class Zend_Session extends Zend_Session_Abstract
     public static function isReadable()
     {
         return parent::$_readable;
+    }
+
+    /**
+     * @todo Remove definition and calls after upgrade to PHP 7.4
+     *
+     * This can be removed once we update to 7.4 or above as then
+     * we can use php.ini directive to achieve the same `session.cookie_samesite=None`
+     */
+    public static function sameSiteCookieWorkaroundPrePhp74()
+    {
+        if (version_compare(PHP_VERSION, '7.3.0', '<')) {
+            setcookie('IFBYPHONE', self::getId(), 0, '/; SameSite=None; HttpOnly; Secure');
+        } else {
+            setcookie('IFBYPHONE', self::getId(), [
+                'expires'  => 0,
+                'path'     => '/',
+                'secure'   => true,
+                'httponly' => true,
+                'samesite' => 'None'
+            ]);
+        }
     }
 
 }
