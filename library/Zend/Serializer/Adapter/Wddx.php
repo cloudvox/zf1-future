@@ -43,9 +43,9 @@ class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstra
     /**
      * @var array Default options
      */
-    protected $_options = array(
+    protected $_options = [
         'comment' => null,
-    );
+    ];
 
     /**
      * Constructor
@@ -54,7 +54,7 @@ class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstra
      * @return void
      * @throws Zend_Serializer_Exception if wddx extension not found
      */
-    public function __construct($opts = array())
+    public function __construct($opts = [])
     {
         if (!extension_loaded('wddx')) {
             require_once 'Zend/Serializer/Exception.php';
@@ -72,13 +72,15 @@ class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstra
      * @return string
      * @throws Zend_Serializer_Exception on wddx error
      */
-    public function serialize($value, array $opts = array())
+    public function serialize($value, array $opts = [])
     {
         $opts = $opts + $this->_options;
 
         if (isset($opts['comment']) && $opts['comment']) {
+            trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert ERROR: Function wddx_serialize_value() is removed since PHP 7.4\n\tERROR: Extension 'wddx' is removed since PHP 7.4; Use pecl\/wddx instead", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $wddx = wddx_serialize_value($value, (string)$opts['comment']);
         } else {
+            trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert ERROR: Function wddx_serialize_value() is removed since PHP 7.4\n\tERROR: Extension 'wddx' is removed since PHP 7.4; Use pecl\/wddx instead", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $wddx = wddx_serialize_value($value);
         }
 
@@ -98,8 +100,9 @@ class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstra
      * @return mixed
      * @throws Zend_Serializer_Exception on wddx error
      */
-    public function unserialize($wddx, array $opts = array())
+    public function unserialize($wddx, array $opts = [])
     {
+        trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert ERROR: Function wddx_deserialize() is removed since PHP 7.4\n\tERROR: Extension 'wddx' is removed since PHP 7.4; Use pecl\/wddx instead", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $ret = wddx_deserialize($wddx);
 
         if ($ret === null) {

@@ -198,7 +198,7 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
             return null;
         }
 
-        $entry = array('dn' => $this->key());
+        $entry = ['dn' => $this->key()];
         $ber_identifier = null;
         trigger_error("PHP 7.2 Compatibility Alert ERROR: The \"ber_identifier\" parameter for function ldap_first_attribute() is removed since PHP 5.2.4".sprintf(" (%s::%s)", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $name = @ldap_first_attribute($this->_ldap->getResource(), $this->_current,

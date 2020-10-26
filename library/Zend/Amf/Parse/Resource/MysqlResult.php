@@ -36,12 +36,12 @@ class Zend_Amf_Parse_Resource_MysqlResult
      *
      * Key => Value is Mysql type (exact string) => PHP type
      */
-    static public $fieldTypes = array(
+    static public $fieldTypes = [
         "int" => "int",
         "timestamp" => "int",
         "year" => "int",
         "real" => "float",
-    );
+    ];
     /**
      * Parse resource into array
      *
@@ -49,10 +49,10 @@ class Zend_Amf_Parse_Resource_MysqlResult
      * @return array
      */
     public function parse($resource) {
-        $result = array();
+        $result = [];
         trigger_error("PHP 7.2 Compatibility Alert ERROR: Extension 'mysql_' is deprecated since PHP 5.5 and removed since PHP 7.0; Use mysqli instead".sprintf(" (%s::%s)", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         $fieldcnt = mysql_num_fields($resource);
-        $fields_transform = array();
+        $fields_transform = [];
         for($i=0;$i<$fieldcnt;$i++) {
             trigger_error("PHP 7.2 Compatibility Alert ERROR: Extension 'mysql_' is deprecated since PHP 5.5 and removed since PHP 7.0; Use mysqli instead".sprintf(" (%s::%s)", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $type = mysql_field_type($resource, $i);

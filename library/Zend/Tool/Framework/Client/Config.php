@@ -39,7 +39,7 @@ class Zend_Tool_Framework_Client_Config
     /**
      * @param array $options
      */
-    public function __config($options = array())
+    public function __config($options = [])
     {
         trigger_error("PHP 7.2 Compatibility Alert WARNING: Method name \"Zend_Tool_Framework_Client_Config::__config\" is discouraged; PHP has reserved all method names with a double underscore prefix for future use.".sprintf(" (%s::%s)", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         if ($options) {
@@ -89,11 +89,11 @@ class Zend_Tool_Framework_Client_Config
         switch ($suffix) {
             case '.ini':
                 require_once 'Zend/Config/Ini.php';
-                $this->_config = new Zend_Config_Ini($configFilepath, null, array('allowModifications' => true));
+                $this->_config = new Zend_Config_Ini($configFilepath, null, ['allowModifications' => true]);
                 break;
             case '.xml':
                 require_once 'Zend/Config/Xml.php';
-                $this->_config = new Zend_Config_Xml($configFilepath, null, array('allowModifications' => true));
+                $this->_config = new Zend_Config_Xml($configFilepath, null, ['allowModifications' => true]);
                 break;
             case '.php':
                 require_once 'Zend/Config.php';

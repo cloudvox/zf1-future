@@ -35,14 +35,14 @@ require_once 'Zend/Translate/Adapter.php';
  */
 class Zend_Translate_Adapter_Csv extends Zend_Translate_Adapter
 {
-    private $_data    = array();
+    private $_data    = [];
 
     /**
      * Generates the adapter
      *
      * @param  array|Zend_Config $options Translation content
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         $this->_options['delimiter'] = ";";
         $this->_options['length']    = 0;
@@ -53,7 +53,7 @@ class Zend_Translate_Adapter_Csv extends Zend_Translate_Adapter
         } else if (func_num_args() > 1) {
             trigger_error("PHP 7.2 Compatibility Alert ERROR: Since PHP 7.0, functions inspecting arguments, like func_get_args(), no longer report the original value as passed to a parameter, but will instead provide the current value.".sprintf(" (%s::%s)", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
             $args               = func_get_args();
-            $options            = array();
+            $options            = [];
             $options['content'] = array_shift($args);
 
             if (!empty($args)) {
@@ -65,7 +65,7 @@ class Zend_Translate_Adapter_Csv extends Zend_Translate_Adapter
                 $options = array_merge($opt, $options);
             }
         } else if (!is_array($options)) {
-            $options = array('content' => $options);
+            $options = ['content' => $options];
         }
 
         parent::__construct($options);
@@ -80,9 +80,9 @@ class Zend_Translate_Adapter_Csv extends Zend_Translate_Adapter
      * @param  array         $option    OPTIONAL Options to use
      * @return array
      */
-    protected function _loadTranslationData($filename, $locale, array $options = array())
+    protected function _loadTranslationData($filename, $locale, array $options = [])
     {
-        $this->_data = array();
+        $this->_data = [];
         $options     = $options + $this->_options;
         $this->_file = @fopen($filename, 'rb');
         if (!$this->_file) {

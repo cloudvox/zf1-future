@@ -59,7 +59,7 @@ class Zend_Tool_Project_Provider_DbAdapter
 
         $this->_appConfigFilePath = $appConfigFileResource->getPath();
 
-        $this->_config = new Zend_Config_Ini($this->_appConfigFilePath, null, array('skipExtends' => true, 'allowModifications' => true));
+        $this->_config = new Zend_Config_Ini($this->_appConfigFilePath, null, ['skipExtends' => true, 'allowModifications' => true]);
 
         if ($sectionName != 'production') {
             $this->_sectionName = $sectionName;
@@ -86,7 +86,7 @@ class Zend_Tool_Project_Provider_DbAdapter
 
     protected function _configureViaDSN($dsn)
     {
-        $dsnVars = array();
+        $dsnVars = [];
 
         if (strpos($dsn, '=') === false) {
             throw new Zend_Tool_Project_Provider_Exception('At least one name value pair is expected, typcially '
@@ -97,11 +97,12 @@ class Zend_Tool_Project_Provider_DbAdapter
         parse_str($dsn, $dsnVars);
 
         // parse_str suffers when magic_quotes is enabled
+        trigger_error(sprintf("%s (%s::%s)", "PHP 7.4 Compatibility Alert WARNING: Function get_magic_quotes_gpc() is deprecated since PHP 7.4", __FILE__, __LINE__) . "\n\t" . implode("\n\t", array_map(function ($item) { return call_user_func_array('sprintf', array_values(array_merge(array('format' => '%s::%s %s%s%s'), array_fill_keys(array('file', 'line', 'class', 'type', 'function'), null), $item))); }, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))), E_USER_WARNING);
         if (get_magic_quotes_gpc()) {
-            array_walk_recursive($dsnVars, array($this, '_cleanMagicQuotesInValues'));
+            array_walk_recursive($dsnVars, [$this, '_cleanMagicQuotesInValues']);
         }
 
-        $dbConfigValues = array('resources' => array('db' => null));
+        $dbConfigValues = ['resources' => ['db' => null]];
 
         if (isset($dsnVars['adapter'])) {
             $dbConfigValues['resources']['db']['adapter'] = $dsnVars['adapter'];
