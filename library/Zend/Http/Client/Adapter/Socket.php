@@ -81,6 +81,13 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
     ];
 
     /**
+     * Whether the socket was created without a request_timeout, in which case we'll repeatedly sync it to timeout
+     *
+     * @var boolean
+     */
+    protected $config_request_timeout_passthrough = false;
+
+    /**
      * Request method - will be set by write() and might be used by read()
      *
      * @var string
@@ -238,7 +245,11 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
             //distinguish between request timeout and connect timeout like in curl adapter
             // request_timeout defaults to connection timeout to keep backwards compatibility
-            if(!array_key_exists('request_timeout', $this->config)) {
+            // if this socket ever lacked a request_timeout, then sync it to timeout
+            if (!array_key_exists('request_timeout', $this->config)) {
+                $this->config_request_timeout_passthrough = true;
+            }
+            if ($this->config_request_timeout_passthrough) {
                 $this->config['request_timeout'] = $this->config['timeout'];
             }
             
